@@ -27,8 +27,8 @@ mailChimp.setConfig({
 
 
 const newSubs = async ( listID, newUser) => {
-    const checkmail = await mailChimp.ping.get()
-    console.log(checkmail)
+    // const checkmail = await mailChimp.ping.get()
+    // console.log(checkmail)
     console.log(process.env.AUDIENCEID)
     console.log(process.env.CHIMPAPIKEY)
     try {
