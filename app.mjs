@@ -15,6 +15,10 @@ app.use(express.urlencoded( { extended: true } ))
 //specify static folder 'public'
 app.use(express.static('public'))
 
+const test = () => {
+    console.log('reached this far')
+}
+
 const newSubs = async ( listID, newUser) => {
     
     mailChimp.setConfig({
@@ -24,8 +28,7 @@ const newSubs = async ( listID, newUser) => {
     })
     const checkmail = await mailChimp.ping.get()
     console.log(checkmail)
-    console.log(process.env.AUDIENCEID)
-    console.log(process.env.CHIMPAPIKEY)
+    
     /* try {
         const response = await mailChimp.lists.addListMember(listID,{
             email_address: newUser.email,
@@ -76,8 +79,9 @@ app.post('/', (req, res) => {
         console.log('err here! ', error)
         res.sendFile(__dirname + '/failure.html')
     }) */
-
-    newSubs()
+    console.log(process.env.AUDIENCEID)
+    console.log(process.env.CHIMPAPIKEY)
+    test()
     
 })
 
