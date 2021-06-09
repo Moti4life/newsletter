@@ -87,7 +87,7 @@ app.post('/backToSignUp', (req, res) => {
     res.redirect('/')
 })
 
-app.listen(3000, () => {
+app.listen(port, () => {
     console.log('now served at port: ' + port)
     // console.log(__dirname)
 })
