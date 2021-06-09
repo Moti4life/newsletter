@@ -46,9 +46,9 @@ const newSubs = async ( listID, newUser) => {
         return response.id
 
     } catch (error) {
-        // console.log('error occur')
-        // console.log(error.status)
-        // console.log(error.response.error.text)
+        console.log('error occur')
+        console.log(error.status)
+        console.log(error.response.error.text)
         throw new Error('something went wrong')
     }
 
