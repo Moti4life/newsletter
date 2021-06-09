@@ -1,4 +1,4 @@
-import "./env.js"
+import './env.js'
 import express from 'express';
 import path from 'path';
 import mailChimp from '@mailchimp/mailchimp_marketing'
@@ -18,17 +18,14 @@ app.use(express.urlencoded( { extended: true } ))
 //specify static folder 'public'
 app.use(express.static('public'))
 
-mailChimp.setConfig({
-    apiKey: process.env.CHIMPAPIKEY,
-    server: 'us6'
-
-})
-
-
-
 const newSubs = async ( listID, newUser) => {
     // const checkmail = await mailChimp.ping.get()
     // console.log(checkmail)
+    mailChimp.setConfig({
+        apiKey: process.env.CHIMPAPIKEY,
+        server: 'us6'
+    
+    })
     console.log(process.env.AUDIENCEID)
     console.log(process.env.CHIMPAPIKEY)
     try {
