@@ -1,8 +1,8 @@
+import "./env.js"
 import express from 'express';
 import path from 'path';
 import mailChimp from '@mailchimp/mailchimp_marketing'
-import dotenv from 'dotenv'
-dotenv.config()
+
 
 //import https from "https"
 
