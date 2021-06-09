@@ -3,9 +3,6 @@ import express from 'express';
 import path from 'path';
 import mailChimp from '@mailchimp/mailchimp_marketing'
 
-
-//import https from "https"
-
 //needed for es6?
 const __dirname = path.resolve();
 
@@ -19,16 +16,17 @@ app.use(express.urlencoded( { extended: true } ))
 app.use(express.static('public'))
 
 const newSubs = async ( listID, newUser) => {
-    // const checkmail = await mailChimp.ping.get()
-    // console.log(checkmail)
+    
     mailChimp.setConfig({
         apiKey: process.env.CHIMPAPIKEY,
         server: 'us6'
     
     })
+    const checkmail = await mailChimp.ping.get()
+    console.log(checkmail)
     console.log(process.env.AUDIENCEID)
     console.log(process.env.CHIMPAPIKEY)
-    try {
+    /* try {
         const response = await mailChimp.lists.addListMember(listID,{
             email_address: newUser.email,
             status: "subscribed",
@@ -47,7 +45,7 @@ const newSubs = async ( listID, newUser) => {
         console.log(error.status)
         console.log(error.response.error.text)
         throw new Error('something went wrong')
-    }
+    } */
 
     // console.log(listID)
     // console.log(newUser)
@@ -64,7 +62,8 @@ app.post('/', (req, res) => {
     // console.log(req.body)
     // console.log(req.body.signupfName)
     // console.log(req.body.signupEmail)
-    const listAudienceId = process.env.AUDIENCEID
+
+    /* const listAudienceId = process.env.AUDIENCEID
     const subscribeUser = {
         firstName: req.body.signupfName,
         lastName: req.body.signuplName,
@@ -76,7 +75,9 @@ app.post('/', (req, res) => {
     }).catch( (error) => {
         console.log('err here! ', error)
         res.sendFile(__dirname + '/failure.html')
-    })
+    }) */
+
+    newSubs()
     
 })
 
