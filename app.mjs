@@ -1,6 +1,9 @@
 import express from 'express';
 import path from 'path';
 import mailChimp from '@mailchimp/mailchimp_marketing'
+import dotenv from 'dotenv'
+dotenv.config()
+
 //import https from "https"
 
 //needed for es6?
@@ -8,7 +11,7 @@ const __dirname = path.resolve();
 
 
 const app = express()
-const port = 3000
+const port = process.env.PORT
 
 app.use(express.urlencoded( { extended: true } ))
 
@@ -16,7 +19,7 @@ app.use(express.urlencoded( { extended: true } ))
 app.use(express.static('public'))
 
 mailChimp.setConfig({
-    apiKey: 'e3b60a1aeaf70a158d569eed563eb755-us6',
+    apiKey: process.env.CHIMPAPIKEY,
     server: 'us6'
 
 })
@@ -26,7 +29,8 @@ mailChimp.setConfig({
 const newSubs = async ( listID, newUser) => {
     // const response = await mailChimp.ping.get()
     // console.log(response)
-
+    // console.log(process.env.AUDIENCEID)
+    // console.log(process.env.CHIMPAPIKEY)
     try {
         const response = await mailChimp.lists.addListMember(listID,{
             email_address: newUser.email,
@@ -42,15 +46,12 @@ const newSubs = async ( listID, newUser) => {
         return response.id
 
     } catch (error) {
-        console.log('error occur')
-        console.log(error.status)
+        // console.log('error occur')
+        // console.log(error.status)
         // console.log(error.response.error.text)
         throw new Error('something went wrong')
     }
 
-    
-    
-    
     // console.log(listID)
     // console.log(newUser)
     // console.log(newUser.firstName + ' ' + newUser.lastName)
@@ -66,7 +67,7 @@ app.post('/', (req, res) => {
     // console.log(req.body)
     // console.log(req.body.signupfName)
     // console.log(req.body.signupEmail)
-    const listAudienceId = '388c0df3f9'
+    const listAudienceId = process.env.AUDIENCEID
     const subscribeUser = {
         firstName: req.body.signupfName,
         lastName: req.body.signuplName,
@@ -88,12 +89,5 @@ app.post('/backToSignUp', (req, res) => {
 
 app.listen(3000, () => {
     console.log('now served at port: ' + port)
-    console.log(__dirname)
+    // console.log(__dirname)
 })
-
-
-/* Audience ID || list ID
-388c0df3f9 */
-
-/* apiKey
-e3b60a1aeaf70a158d569eed563eb755-us6 */
