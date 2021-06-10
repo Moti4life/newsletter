@@ -22,15 +22,15 @@ mailChimp.setConfig({
 
 })
 
-const test = async () => {
+/* const test = async () => {
     console.log('reached this test')
     const checkmail = await mailChimp.ping.get()
     console.log(checkmail)
-}
+} */
 
 const newSubs = async ( listID, newUser) => {
     
-    /* try {
+    try {
         const response = await mailChimp.lists.addListMember(listID,{
             email_address: newUser.email,
             status: "subscribed",
@@ -49,7 +49,7 @@ const newSubs = async ( listID, newUser) => {
         console.log(error.status)
         console.log(error.response.error.text)
         throw new Error('something went wrong')
-    } */
+    }
 
     // console.log(listID)
     // console.log(newUser)
@@ -73,17 +73,15 @@ app.post('/', (req, res) => {
         lastName: req.body.signuplName,
         email: req.body.signupEmail
     }
-    /* newSubs(listAudienceId, subscribeUser).then( (result) => {
-        console.log('id is: ', result)
+    newSubs(listAudienceId, subscribeUser).then( (result) => {
+        console.log('new id is: ', result)
         res.sendFile(__dirname + '/success.html')
     }).catch( (error) => {
         console.log('err here! ', error)
         res.sendFile(__dirname + '/failure.html')
-    }) */
+    })
 
-    console.log(process.env.AUDIENCEID)
-    console.log(process.env.CHIMPAPIKEY)
-    test()
+    //test()
     
 })
 
