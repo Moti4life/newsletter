@@ -15,19 +15,20 @@ app.use(express.urlencoded( { extended: true } ))
 //specify static folder 'public'
 app.use(express.static('public'))
 
-const test = () => {
-    console.log('reached this far')
+
+mailChimp.setConfig({
+    apiKey: process.env.CHIMPAPIKEY,
+    server: 'us6'
+
+})
+
+const test = async () => {
+    console.log('reached this test')
+    const checkmail = await mailChimp.ping.get()
+    console.log(checkmail)
 }
 
 const newSubs = async ( listID, newUser) => {
-    
-    mailChimp.setConfig({
-        apiKey: process.env.CHIMPAPIKEY,
-        server: 'us6'
-    
-    })
-    const checkmail = await mailChimp.ping.get()
-    console.log(checkmail)
     
     /* try {
         const response = await mailChimp.lists.addListMember(listID,{
@@ -66,19 +67,20 @@ app.post('/', (req, res) => {
     // console.log(req.body.signupfName)
     // console.log(req.body.signupEmail)
 
-    /* const listAudienceId = process.env.AUDIENCEID
+    const listAudienceId = process.env.AUDIENCEID
     const subscribeUser = {
         firstName: req.body.signupfName,
         lastName: req.body.signuplName,
         email: req.body.signupEmail
     }
-    newSubs(listAudienceId, subscribeUser).then( (result) => {
+    /* newSubs(listAudienceId, subscribeUser).then( (result) => {
         console.log('id is: ', result)
         res.sendFile(__dirname + '/success.html')
     }).catch( (error) => {
         console.log('err here! ', error)
         res.sendFile(__dirname + '/failure.html')
     }) */
+
     console.log(process.env.AUDIENCEID)
     console.log(process.env.CHIMPAPIKEY)
     test()
