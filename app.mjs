@@ -39,14 +39,14 @@ const newSubs = async ( listID, newUser) => {
             }
         })
     
-        console.log('added new member, contact id is: ' + response.id)
+        //console.log('added new member, contact id is: ' + response.id)
         //console.log(response)
         return response.id
 
     } catch (error) {
-        console.log('error occur')
-        console.log(error.status)
-        console.log(error.response.error.text)
+        //console.log('error occur')
+        //console.log(error.status)
+        //console.log(error.response.error.text)
         throw new Error('something went wrong')
     }
 
@@ -73,10 +73,10 @@ app.post('/', (req, res) => {
         email: req.body.signupEmail
     }
     newSubs(listAudienceId, subscribeUser).then( (result) => {
-        console.log('new id is: ', result)
+        //console.log('new id is: ', result)
         res.sendFile(__dirname + '/views/success.html')
     }).catch( (error) => {
-        console.log('err here! ', error)
+        //console.log('err here! ', error)
         res.sendFile(__dirname + '/views/failure.html')
     })
 
