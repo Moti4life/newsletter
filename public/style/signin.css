@@ -10,17 +10,21 @@ body {
   padding-top: 40px;
   padding-bottom: 40px;
   background-color: #fdf3ec;
+  background-image: url(../images/bananaBGopaque.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
 }
 
 .form-signin {
   width: 100%;
-  max-width: 330px;
-  padding: 15px;
+  max-width: 80%;
+  padding: 2rem;
   margin: auto;
-}
-
-.form-signin .checkbox {
-  font-weight: 400;
+  /* background-color: #fdf3ecbd; */
+  background-color: hsla(50, 33%, 93%, 0.705);
+  
 }
 
 .form-signin .form-floating:focus-within {
@@ -45,8 +49,61 @@ body {
   border-top-right-radius: 0;
 }
 
+.centerContent{
+  margin-top: 1rem;
+}
+
 .bananaBread {
   width: 100%;
-  
 
+}
+
+.btn{
+  background-color: hsl(153, 100%, 25%);
+  color: hsl(163, 33%, 96%);
+}
+
+.btn:hover{
+  color: hsl(163, 33%, 96%);
+  background-color: hsl(153, 100%, 35%);;
+}
+
+.footer{
+  text-align: center;
+}
+
+
+
+@media  (max-width: 576px){
+  h1{
+    font-size: 2rem;
+  }
+  .form-signin {
+    min-width: 100%;
+    padding: 1rem 0.5rem;
+  }
+  body{
+    padding: 4%;
+  }
+  .centerContent{
+    margin-top: 0;
+  }
+  
+}
+@media (max-aspect-ratio: 4/3) {
+  body{
+    background-size: 260%;
+    background-position: center;
+    background-repeat: repeat;
+  }
+}
+
+@media (min-width: 1280px){
+  .signup{
+    padding: 5rem;
+    margin-top: 15%;
+  }
+  .displayBread{
+    max-width: 50%;;
+  }
 }

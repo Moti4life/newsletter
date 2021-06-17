@@ -6,14 +6,13 @@ import mailChimp from '@mailchimp/mailchimp_marketing'
 //needed for es6?
 const __dirname = path.resolve();
 
-
 const app = express()
 const port = process.env.PORT || 3000
 
 app.use(express.urlencoded( { extended: true } ))
 
-//specify static folder 'public'
-app.use(express.static('public'))
+const publicDirectoryPath = path.join(__dirname, '/public')
+app.use(express.static(publicDirectoryPath))  //serve static files
 
 
 mailChimp.setConfig({
@@ -59,7 +58,7 @@ const newSubs = async ( listID, newUser) => {
 
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/signup.html')
+    res.sendFile(__dirname + '/views/signup.html')
 })
 
 app.post('/', (req, res) => {
@@ -75,10 +74,10 @@ app.post('/', (req, res) => {
     }
     newSubs(listAudienceId, subscribeUser).then( (result) => {
         console.log('new id is: ', result)
-        res.sendFile(__dirname + '/success.html')
+        res.sendFile(__dirname + '/views/success.html')
     }).catch( (error) => {
         console.log('err here! ', error)
-        res.sendFile(__dirname + '/failure.html')
+        res.sendFile(__dirname + '/views/failure.html')
     })
 
     //test()
